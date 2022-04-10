@@ -6,25 +6,39 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     //Enemy
-
+    [Tooltip("Drag in the enemy's Nav Mesh")]
     public NavMeshAgent agent;
+    [Space(5)]
 
+    //Layers
+    [Tooltip("Drag in the player character")]
     public Transform player;
-
-    public LayerMask whatIsGround, whatIsPlayer;
+    [Header("Layers")]
+    [Tooltip("Select the ground layer")]
+    public LayerMask whatIsGround; 
+    [Tooltip("Select the player layer")]
+    public LayerMask whatIsPlayer;
 
     //Patroling
-    public Vector3 walkPiont;
+    Vector3 walkPiont;
     bool walkPointSet;
+    [Header("AI movement")]
+    [Tooltip("Set max walk distance before turning")]
     public float walkPointRange;
 
+    //States
+    [Header("States")]
+    [Tooltip("Max range the AI can follow the player")]
+    public float sightRange;
+    [Tooltip("Max range the AI can attack the player")]
+    public float attackRange;
+    bool playerInSightRange, playerInAttackRange;
+    
     //Attacking
+    [Header("Attack")]
+    [Tooltip("Set attackspeed")]
     public float timeBetweenAttacks;
     bool alreadyAttacked;
-
-    //States
-    public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
 
 
 
