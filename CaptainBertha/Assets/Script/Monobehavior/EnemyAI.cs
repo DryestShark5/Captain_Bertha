@@ -22,9 +22,16 @@ public class EnemyAI : MonoBehaviour
     //Patroling
     Vector3 walkPiont;
     bool walkPointSet;
+    Vector3 startPos;
     [Header("AI movement")]
     [Tooltip("Set max walk distance before turning")]
     public float walkPointRange;
+    [Tooltip("Set speed when in patrol state")]
+    public float patrolSpeed;
+    [Tooltip("Set speed when in chase state")]
+    public float chaseSpeed;
+    [Tooltip("Changes patrol state to idle state")]
+    public bool idle;
 
     //States
     [Header("States")]
@@ -46,6 +53,7 @@ public class EnemyAI : MonoBehaviour
     {
         player = GameObject.Find("Bertha").transform;
         agent = GetComponent<NavMeshAgent>();
+        startPos = this.transform.position;
     }
 
     private void Update()
@@ -64,8 +72,12 @@ public class EnemyAI : MonoBehaviour
     {
         if (!walkPointSet) SearchWalkPoint();
 
-        if (walkPointSet)
+        if (idle == true)
+            agent.SetDestination(startPos);
+        else 
             agent.SetDestination(walkPiont);
+        agent.speed = patrolSpeed;
+        
 
         Vector3 distanceToWalkPoint = transform.position - walkPiont;
 
@@ -89,6 +101,7 @@ public class EnemyAI : MonoBehaviour
     void ChasePlayer()
     {
         agent.SetDestination(player.position);
+        agent.speed = chaseSpeed;
     }
 
     void AttackPlayer()
