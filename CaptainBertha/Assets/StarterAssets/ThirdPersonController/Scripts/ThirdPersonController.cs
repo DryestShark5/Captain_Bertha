@@ -147,7 +147,7 @@ namespace StarterAssets
 			{
 				_animator.SetBool(_animIDGrounded, Grounded);
 			}
-		}
+		} 
 
 		private void CameraRotation()
 		{

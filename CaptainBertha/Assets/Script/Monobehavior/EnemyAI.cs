@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     //Enemy
-    [Tooltip("Drag in the enemy's Nav Mesh")]
+    [Tooltip("Add a Nav Mesh agent component to your enemy, and drag it in here")]
     public NavMeshAgent agent;
     [Space(5)]
 
@@ -37,7 +37,7 @@ public class EnemyAI : MonoBehaviour
     [Header("States")]
     [Tooltip("Max range the AI can follow the player")]
     public float sightRange;
-    [Tooltip("Max range the AI can attack the player")]
+    [Tooltip("Max range the AI can attack the player, if attackRange < 2 the AI is melee")]
     public float attackRange;
     bool playerInSightRange, playerInAttackRange;
     
@@ -46,8 +46,7 @@ public class EnemyAI : MonoBehaviour
     [Tooltip("Set attackspeed")]
     public float timeBetweenAttacks;
     bool alreadyAttacked;
-
-
+    public GameObject projectile;
 
     private void Awake()
     {
@@ -66,6 +65,8 @@ public class EnemyAI : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInSightRange && playerInAttackRange) AttackPlayer();
+
+
     }
 
     void Patroling()
@@ -113,9 +114,11 @@ public class EnemyAI : MonoBehaviour
 
         if (!alreadyAttacked)
         {
-            //Attack code here
+            //Attack code
+            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
 
-
+            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
+            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
