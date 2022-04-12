@@ -16,32 +16,26 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform spawnBulletPosition;
     [SerializeField] private float bulletForce;
     [SerializeField] private float upForce;
+    [SerializeField] Slider healthBar;
 
     private StarterAssetsInputs starterAssetsInputs;
     private ThirdPersonController thirdPersonController;
 
     public float health;
-    public float currentHealt;
-    public float maxHealth;
     public float damage;
 
-    public Slider healthBar;
+    private int maxHealth;
+    private int currentHealth;
+
 
     private void Awake()
     {
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         thirdPersonController = GetComponent<ThirdPersonController>();
-    }
-    //Mia added this
-    void Start()
-    {
-        currentHealt = maxHealth;
-        healthBar.value = currentHealt;
-        healthBar.maxValue = maxHealth;
 
-        
+        healthBar.maxValue = health;
+        healthBar.value = health;
     }
-
     private void Update()
     {
         Vector3 mouseWorldPosition = Vector3.zero;
@@ -81,10 +75,13 @@ public class Player : MonoBehaviour
 
             starterAssetsInputs.shoot = false;
         }
-    }
-    public void SendDamage(float damageValue)
-    {
-        currentHealt -= damageValue;
-        healthBar.value = currentHealt;
+
+        healthBar.value = health;
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+
     }
 }

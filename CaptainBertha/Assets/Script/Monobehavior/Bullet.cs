@@ -21,10 +21,5 @@ public class Bullet : MonoBehaviour
         {
             healthScript.health -= enemy.damage;
         }
-
-        if (collision.gameObject.tag == ("Enemy"))
-        {
-            enemy.health -= healthScript.damage;
-        }
     }
 }
