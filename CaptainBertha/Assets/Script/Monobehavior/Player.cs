@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using StarterAssets;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -20,12 +21,25 @@ public class Player : MonoBehaviour
     private ThirdPersonController thirdPersonController;
 
     public float health;
+    public float currentHealt;
+    public float maxHealth;
     public float damage;
+
+    public Slider healthBar;
 
     private void Awake()
     {
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         thirdPersonController = GetComponent<ThirdPersonController>();
+    }
+    //Mia added this
+    void Start()
+    {
+        currentHealt = maxHealth;
+        healthBar.value = currentHealt;
+        healthBar.maxValue = maxHealth;
+
+        
     }
 
     private void Update()
@@ -67,9 +81,10 @@ public class Player : MonoBehaviour
 
             starterAssetsInputs.shoot = false;
         }
-
-        
-
-        if (health <= 0) Destroy(gameObject);
+    }
+    public void SendDamage(float damageValue)
+    {
+        currentHealt -= damageValue;
+        healthBar.value = currentHealt;
     }
 }
