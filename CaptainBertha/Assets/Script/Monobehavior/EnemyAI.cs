@@ -15,7 +15,7 @@ public class EnemyAI : MonoBehaviour
     public Transform player;
     [Header("Layers")]
     [Tooltip("Select the ground layer")]
-    public LayerMask whatIsGround; 
+    public LayerMask whatIsGround;
     [Tooltip("Select the player layer")]
     public LayerMask whatIsPlayer;
 
@@ -40,13 +40,27 @@ public class EnemyAI : MonoBehaviour
     [Tooltip("Max range the AI can attack the player, if attackRange < 2 the AI is melee")]
     public float attackRange;
     bool playerInSightRange, playerInAttackRange;
-    
+
+    [Header("Health")]
+    [Tooltip("Set max health of enemy")]
+    public float health;
+
     //Attacking
     [Header("Attack")]
     [Tooltip("Set attackspeed")]
     public float timeBetweenAttacks;
     bool alreadyAttacked;
+    [Tooltip("Drag in a prefab to call on when attacking")]
     public GameObject projectile;
+    [Tooltip("Drag in a gameobject without collider where you want bullet to spawn")]
+    public GameObject firePoint;
+    [Tooltip("Set speed for prefab when shot")]
+    public float bulletForce;
+    [Tooltip("Set damage the enemy deals")]
+    public float damage;
+    
+    [Tooltip("Set height for the shot")]
+    public float upForce;
 
     private void Awake()
     {
@@ -75,10 +89,10 @@ public class EnemyAI : MonoBehaviour
 
         if (idle == true)
             agent.SetDestination(startPos);
-        else 
+        else
             agent.SetDestination(walkPiont);
         agent.speed = patrolSpeed;
-        
+
 
         Vector3 distanceToWalkPoint = transform.position - walkPiont;
 
@@ -115,10 +129,10 @@ public class EnemyAI : MonoBehaviour
         if (!alreadyAttacked)
         {
             //Attack code
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            Rigidbody rb = Instantiate(projectile, firePoint.transform.position, Quaternion.identity).GetComponent<Rigidbody>();
 
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
+            rb.AddForce(transform.forward * bulletForce, ForceMode.Impulse);
+            rb.AddForce(transform.up * upForce, ForceMode.Impulse);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
@@ -128,5 +142,17 @@ public class EnemyAI : MonoBehaviour
     void ResetAttack()
     {
         alreadyAttacked = false;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0) Invoke(nameof(DestroyEnemy), .5f);
+    }
+
+    private void DestroyEnemy()
+    {
+        Destroy(gameObject);
     }
 }
