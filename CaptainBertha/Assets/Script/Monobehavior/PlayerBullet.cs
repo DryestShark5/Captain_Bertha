@@ -26,7 +26,11 @@ public class PlayerBullet : MonoBehaviour
         if (other.tag == ("Enemy"))
         {
             enemy.health -= bertha.damage;
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

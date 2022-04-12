@@ -65,9 +65,6 @@ public class Player : MonoBehaviour
             Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
             Instantiate(projectile, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
 
-            //rb.AddForce(transform.forward * bulletForce, ForceMode.Impulse);
-            //rb.AddForce(transform.up * upForce, ForceMode.Impulse);
-
             starterAssetsInputs.shoot = false;
         }
 
