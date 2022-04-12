@@ -5,12 +5,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
-    PlayerHealth healthScript;
+    Player healthScript;
     EnemyAI enemy;
 
     private void Start()
     {
-        healthScript = GameObject.Find("Bertha").GetComponent<PlayerHealth>();
+        healthScript = GameObject.Find("Bertha").GetComponent<Player>();
         enemy = GameObject.Find("Enemy").GetComponent<EnemyAI>();
     }
     private void OnCollisionEnter(Collision collision)
