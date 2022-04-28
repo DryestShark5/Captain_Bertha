@@ -2907,7 +2907,7 @@ GameObject:
   - component: {fileID: 317725361}
   - component: {fileID: 317725360}
   m_Layer: 0
-  m_Name: IdleEnemy(watchBoat)
+  m_Name: IdleEnemy(Patroling)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2921,7 +2921,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317725358}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 137.932, y: -0.492, z: -111.14}
+  m_LocalPosition: {x: 137.42, y: -0.492, z: -112.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5400,7 +5400,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629101880}
   m_LocalRotation: {x: -0, y: 0.24859999, z: -0, w: 0.9686063}
-  m_LocalPosition: {x: 97.74, y: 2.92, z: -123.13}
+  m_LocalPosition: {x: 98.48, y: 2.92, z: -122.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13147,7 +13147,7 @@ GameObject:
   - component: {fileID: 1494501042}
   - component: {fileID: 1494501041}
   m_Layer: 0
-  m_Name: IdleEnemy
+  m_Name: IdleEnemy(patroling)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13161,7 +13161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1494501039}
   m_LocalRotation: {x: -0, y: 0.24859999, z: -0, w: 0.9686063}
-  m_LocalPosition: {x: 99.491, y: -0.481, z: -91.694}
+  m_LocalPosition: {x: 99.43, y: -0.481, z: -91.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
