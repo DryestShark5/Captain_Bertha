@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     public LayerMask whatIsPlayer;
 
     //Patroling
-    Vector3 walkPiont;
+    Vector3 walkPoint;
     bool walkPointSet;
     Vector3 startPos;
     [Header("AI movement")]
@@ -32,6 +32,7 @@ public class EnemyAI : MonoBehaviour
     public float chaseSpeed;
     [Tooltip("Changes patrol state to idle state")]
     public bool idle;
+    float timer = 10f;
 
     //States
     [Header("States")]
@@ -89,18 +90,32 @@ public class EnemyAI : MonoBehaviour
     {
         if (!walkPointSet) SearchWalkPoint();
 
-        if (idle == true)
+        if (idle)
             agent.SetDestination(startPos);
-        else
-            agent.SetDestination(walkPiont);
-        agent.speed = patrolSpeed;
+        else if (!idle)
+            agent.SetDestination(walkPoint);
+            agent.speed = patrolSpeed;
 
 
-        Vector3 distanceToWalkPoint = transform.position - walkPiont;
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         //walk point reached
         if (distanceToWalkPoint.magnitude < 1f)
+        {
             walkPointSet = false;
+            timer = 10;
+        }
+        
+        if (distanceToWalkPoint.magnitude > 1f)
+        {
+            timer -= Time.deltaTime;
+            if(timer < 0f)
+            {
+                walkPointSet = false;
+                timer = 10f;
+            }
+        }
+
     }
 
     void SearchWalkPoint()
@@ -109,10 +124,14 @@ public class EnemyAI : MonoBehaviour
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-        walkPiont = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.y + randomZ);
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        if (Physics.Raycast(walkPiont, -transform.up, 2f, whatIsGround))
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        {
             walkPointSet = true;
+            Debug.Log("Check");
+        }
+            
     }
 
     void ChasePlayer()
