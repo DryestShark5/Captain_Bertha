@@ -16,7 +16,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform spawnBulletPosition;
     [SerializeField] private float bulletForce;
     [SerializeField] private float upForce;
-    [SerializeField] Slider healthBar;
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private Image crossHair;
 
     private StarterAssetsInputs starterAssetsInputs;
     private ThirdPersonController thirdPersonController;
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour
             aimVirtualCamera.gameObject.SetActive(true);
             thirdPersonController.SetSensitivity(aimSensitivity);
             thirdPersonController.SetRotateOnMove(false);
+            crossHair.enabled = true;
 
             Vector3 worldAimTarget = mouseWorldPosition;
             worldAimTarget.y = transform.position.y;
@@ -66,6 +68,7 @@ public class Player : MonoBehaviour
             aimVirtualCamera.gameObject.SetActive(false);
             thirdPersonController.SetSensitivity(normalSensitivity);
             thirdPersonController.SetRotateOnMove(true);
+            crossHair.enabled = false;
         }
 
         if (starterAssetsInputs.shoot)

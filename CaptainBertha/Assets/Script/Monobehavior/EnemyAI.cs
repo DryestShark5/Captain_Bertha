@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -42,9 +43,14 @@ public class EnemyAI : MonoBehaviour
     public float attackRange;
     bool playerInSightRange, playerInAttackRange;
 
+    //Health
     [Header("Health")]
     [Tooltip("Set max health of enemy")]
     public float health;
+    Player playerS;
+    [Tooltip("Drag inn slider for Health bar")]
+    public Slider enemyHealthBar;
+    //GameObject playerBullet;
 
     //Attacking
     [Header("Attack")]
@@ -67,7 +73,10 @@ public class EnemyAI : MonoBehaviour
     {
         player = GameObject.Find("Bertha").transform;
         agent = GetComponent<NavMeshAgent>();
+        //playerBullet = GameObject.Find("PlayerBullet");
+        playerS = GameObject.Find("Bertha").GetComponent<Player>();
         startPos = this.transform.position;
+
     }
 
     private void Update()
@@ -81,7 +90,9 @@ public class EnemyAI : MonoBehaviour
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInSightRange && playerInAttackRange) AttackPlayer();
 
-        if (health <= 0) Destroy(gameObject);
+        //Health
+        if (health <= 0) Destroy(this.gameObject);
+        enemyHealthBar.value = health;
 
 
     }
@@ -163,5 +174,13 @@ public class EnemyAI : MonoBehaviour
     void ResetAttack()
     {
         alreadyAttacked = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == ("Bullet"))
+        {
+            health -= playerS.damage;
+        }
     }
 }
