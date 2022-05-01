@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float delay = 3;
+
+    float countdown;
+
+    private void Start()
     {
-        
+        countdown = delay;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        countdown -= Time.deltaTime;
+        if (countdown <= 0)
+        {
+            Explode();
+        }
+    }
+
+    void Explode()
+    {
+
     }
 }

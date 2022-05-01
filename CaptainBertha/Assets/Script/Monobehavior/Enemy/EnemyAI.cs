@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour
     [Tooltip("Add a Nav Mesh agent component to your enemy, and drag it in here")]
     public NavMeshAgent agent;
     [Space(5)]
+    Animator enemyAnim;
 
     //Layers
     [Tooltip("Drag in the player character")]
@@ -73,9 +74,9 @@ public class EnemyAI : MonoBehaviour
     {
         player = GameObject.Find("Bertha").transform;
         agent = GetComponent<NavMeshAgent>();
-        //playerBullet = GameObject.Find("PlayerBullet");
         playerS = GameObject.Find("Bertha").GetComponent<Player>();
         startPos = this.transform.position;
+        enemyAnim = GetComponentInChildren<Animator>();
 
     }
 
@@ -109,12 +110,15 @@ public class EnemyAI : MonoBehaviour
 
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
+        enemyAnim.SetBool("Walking", true);
 
         //walk point reached
         if (distanceToWalkPoint.magnitude < 1f)
         {
             walkPointSet = false;
             timer = 10;
+
+            enemyAnim.SetBool("Walking", false);
         }
         
         if (distanceToWalkPoint.magnitude > 1f)
@@ -124,6 +128,8 @@ public class EnemyAI : MonoBehaviour
             {
                 walkPointSet = false;
                 timer = 10f;
+
+                enemyAnim.SetBool("Walking", false);
             }
         }
 
@@ -168,6 +174,8 @@ public class EnemyAI : MonoBehaviour
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
+
+            enemyAnim.SetTrigger("Attack");
         }
     }
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44507962, g: 0.49467683, b: 0.57376647, a: 1}
+  m_IndirectSpecularColor: {r: 0.44507945, g: 0.4946761, b: 0.5737654, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -179,19 +179,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9521282, guid: bc4987e2fb189ec4d96488b047577016, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9521282, guid: bc4987e2fb189ec4d96488b047577016, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 2b248507987b06e4881ba4fcbb92d951, type: 2}
     - target: {fileID: 9521282, guid: bc4987e2fb189ec4d96488b047577016, type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9521282, guid: bc4987e2fb189ec4d96488b047577016, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9521282, guid: bc4987e2fb189ec4d96488b047577016, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'Root'\n\tTransform 'IndexFinger_02'\n\tTransform
-        'Elbow_R'\n\tTransform 'Finger_02'\n\tTransform 'Finger_03'\n\tTransform
-        'Ball_L'\n\tTransform 'Thumb_02'\n\tTransform 'Ball_R'\n\tTransform 'Clavicle_L'\n\tTransform
-        'Finger_01'\n\tand more ...\n\tFrom animation clip 'Neutral Idle'\n\tFrom
-        animation clip 'Sword And Shield Walk'\n\tFrom animation clip 'Sword And
-        Shield Slash'"
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9521282, guid: bc4987e2fb189ec4d96488b047577016, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc4987e2fb189ec4d96488b047577016, type: 3}
@@ -1208,7 +1217,7 @@ MonoBehaviour:
   bulletForce: 40
   upForce: 5
   healthBar: {fileID: 292342811}
-  crossHair: {fileID: 0}
+  crossHair: {fileID: 1925579340}
   health: 100
   damage: 10
 --- !u!1 &956581519
@@ -2228,7 +2237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1925579339
 RectTransform:
   m_ObjectHideFlags: 0
