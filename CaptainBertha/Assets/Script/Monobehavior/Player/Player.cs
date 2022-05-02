@@ -81,6 +81,12 @@ public class Player : MonoBehaviour
             starterAssetsInputs.shoot = false;
         }
 
+        if (starterAssetsInputs.exitGame)
+        {
+            Application.Quit();
+            Debug.Log("Quit!");
+        }
+
         healthBar.value = health;
 
         if (health <= 0)

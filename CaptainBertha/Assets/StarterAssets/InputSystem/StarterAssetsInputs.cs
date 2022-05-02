@@ -14,6 +14,7 @@ namespace StarterAssets
 		public bool sprint;
 		public bool aim;
 		public bool shoot;
+		public bool exitGame;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -57,6 +58,10 @@ namespace StarterAssets
 		{
 			ShootInput(value.isPressed);
 		}
+		public void OnExitGame(InputValue value)
+        {
+			ExitGameInput(value.isPressed);
+        }
 #else
 	// old input sys if we do decide to have it (most likely wont)...
 #endif
@@ -90,6 +95,10 @@ namespace StarterAssets
 		{
 			shoot = newShootState;
 		}
+		public void ExitGameInput(bool newExitGameState)
+        {
+			exitGame = newExitGameState;
+        }
 
 #if !UNITY_IOS || !UNITY_ANDROID
 
