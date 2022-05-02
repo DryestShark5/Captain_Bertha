@@ -9,6 +9,7 @@ public class Bomb : MonoBehaviour
     public float force = 700f;
 
     public float damage;
+    public float fireDamage;
 
     public GameObject explotionEffect;
 
@@ -20,12 +21,12 @@ public class Bomb : MonoBehaviour
     private void Start()
     {
         countdown = delay;
-        enemy = GameObject.Find("Enemy").GetComponent<EnemyAI>();
+        enemy = GameObject.Find("Enemy Bomb").GetComponent<EnemyAI>();
+        damage = enemy.damage;
     }
 
     private void Update()
     {
-        damage = enemy.damage;
 
         countdown -= Time.deltaTime;
         if (countdown <= 0 && !hasExploded)

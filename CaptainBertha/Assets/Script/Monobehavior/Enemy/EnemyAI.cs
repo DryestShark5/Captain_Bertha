@@ -78,6 +78,7 @@ public class EnemyAI : MonoBehaviour
         bomb = GameObject.Find("Bomb").GetComponent<Bomb>();
         startPos = this.transform.position;
         enemyAnim = GetComponentInChildren<Animator>();
+        enemyHealthBar.maxValue = health;
 
     }
 
@@ -95,8 +96,6 @@ public class EnemyAI : MonoBehaviour
         //Health
         if (health <= 0) Destroy(this.gameObject);
         enemyHealthBar.value = health;
-
-
     }
 
     void Patroling()
@@ -112,12 +111,11 @@ public class EnemyAI : MonoBehaviour
             agent.SetDestination(walkPoint);
 
             agent.speed = patrolSpeed;
-            
-            enemyAnim.SetBool("Walking", true);
         }
 
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
+        enemyAnim.SetBool("Walking", true);
 
         //walk point reached
         if (distanceToWalkPoint.magnitude < 1f)
@@ -161,7 +159,7 @@ public class EnemyAI : MonoBehaviour
     {
         agent.SetDestination(player.position);
         agent.speed = chaseSpeed;
-        //enemyAnim.SetBool("Chasing", true);
+        enemyAnim.SetBool("Chasing", true);
     }
 
     void AttackPlayer()
@@ -197,6 +195,11 @@ public class EnemyAI : MonoBehaviour
         if (other.tag == ("Bullet"))
         {
             health -= playerS.damage;
+        }
+
+        if (other.tag == ("Fire"))
+        {
+            health -= bomb.fireDamage;
         }
     }
 

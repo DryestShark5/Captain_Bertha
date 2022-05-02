@@ -25,11 +25,14 @@ public class Player : MonoBehaviour
     public float health;
     public float damage;
 
+    Bomb bomb;
 
     private void Awake()
     {
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         thirdPersonController = GetComponent<ThirdPersonController>();
+
+        bomb = GameObject.Find("Bomb").GetComponent<Bomb>();
 
         healthBar.maxValue = health;
         healthBar.value = health;
@@ -83,5 +86,13 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == ("Fire"))
+        {
+            health -= bomb.fireDamage;
+        }
     }
 }
