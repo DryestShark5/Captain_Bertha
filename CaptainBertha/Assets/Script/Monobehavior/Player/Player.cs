@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float upForce;
     [SerializeField] private Slider healthBar;
     [SerializeField] private Image crossHair;
+    [SerializeField] private GameObject gameOver;
 
     private StarterAssetsInputs starterAssetsInputs;
     private ThirdPersonController thirdPersonController;
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
         thirdPersonController = GetComponent<ThirdPersonController>();
 
         bomb = GameObject.Find("Bomb").GetComponent<Bomb>();
+        gameOver.SetActive(false);
 
         healthBar.maxValue = health;
         healthBar.value = health;
@@ -84,6 +86,9 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            gameOver.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
 
     }

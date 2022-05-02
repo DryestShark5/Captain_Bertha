@@ -111,11 +111,11 @@ public class EnemyAI : MonoBehaviour
             agent.SetDestination(walkPoint);
 
             agent.speed = patrolSpeed;
+            enemyAnim.SetBool("Walking", true);
         }
 
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        enemyAnim.SetBool("Walking", true);
 
         //walk point reached
         if (distanceToWalkPoint.magnitude < 1f)

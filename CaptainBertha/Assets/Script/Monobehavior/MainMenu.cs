@@ -7,9 +7,14 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [System.Obsolete]
-    private void PlayGame()
+    public void PlayGame()
     {
         Application.LoadLevel(1);
+    }
+    [System.Obsolete]
+    public void Menu()
+    {
+        Application.LoadLevel(0);
     }
     public void QuitGame()
     {
