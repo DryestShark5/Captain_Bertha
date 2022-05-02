@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneManager : MonoBehaviour
+public class SceneController : MonoBehaviour
 {
-    public static SceneManager instance;
+    public static SceneController instance;
 
     private void Awake()
     {
-        if (SceneManager.instance == null) instance = this;
+        if (SceneController.instance == null) instance = this;
         else Destroy(gameObject);
     }
 
