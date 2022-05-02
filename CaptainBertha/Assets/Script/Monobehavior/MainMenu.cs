@@ -6,11 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayGame()
+    [System.Obsolete]
+    private void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
+        Application.LoadLevel(1);
     }
     public void QuitGame()
     {
