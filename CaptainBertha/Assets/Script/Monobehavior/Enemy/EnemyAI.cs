@@ -108,12 +108,16 @@ public class EnemyAI : MonoBehaviour
             agent.SetDestination(startPos);
         }
         else if (!idle)
+        {
             agent.SetDestination(walkPoint);
+
             agent.speed = patrolSpeed;
+            
+            enemyAnim.SetBool("Walking", true);
+        }
 
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        enemyAnim.SetBool("Walking", true);
 
         //walk point reached
         if (distanceToWalkPoint.magnitude < 1f)
@@ -157,7 +161,7 @@ public class EnemyAI : MonoBehaviour
     {
         agent.SetDestination(player.position);
         agent.speed = chaseSpeed;
-        enemyAnim.SetBool("Chasing", true);
+        //enemyAnim.SetBool("Chasing", true);
     }
 
     void AttackPlayer()
