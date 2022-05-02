@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class FireFighter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    float timeToBurn = 10f;
+
+    private void Start()
     {
-        
+        Destroy(gameObject, timeToBurn);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
