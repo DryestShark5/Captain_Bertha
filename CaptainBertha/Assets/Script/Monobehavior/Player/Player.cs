@@ -25,9 +25,6 @@ public class Player : MonoBehaviour
     public float health;
     public float damage;
 
-    private int maxHealth;
-    private int currentHealth;
-
 
     private void Awake()
     {

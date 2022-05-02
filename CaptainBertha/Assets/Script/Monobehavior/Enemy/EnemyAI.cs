@@ -49,9 +49,9 @@ public class EnemyAI : MonoBehaviour
     [Tooltip("Set max health of enemy")]
     public float health;
     Player playerS;
+    Bomb bomb;
     [Tooltip("Drag inn slider for Health bar")]
     public Slider enemyHealthBar;
-    //GameObject playerBullet;
 
     //Attacking
     [Header("Attack")]
@@ -75,6 +75,7 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.Find("Bertha").transform;
         agent = GetComponent<NavMeshAgent>();
         playerS = GameObject.Find("Bertha").GetComponent<Player>();
+        bomb = GameObject.Find("Bomb").GetComponent<Bomb>();
         startPos = this.transform.position;
         enemyAnim = GetComponentInChildren<Animator>();
 
@@ -103,7 +104,9 @@ public class EnemyAI : MonoBehaviour
         if (!walkPointSet) SearchWalkPoint();
 
         if (idle)
+        {
             agent.SetDestination(startPos);
+        }
         else if (!idle)
             agent.SetDestination(walkPoint);
             agent.speed = patrolSpeed;
@@ -146,7 +149,6 @@ public class EnemyAI : MonoBehaviour
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
             walkPointSet = true;
-            Debug.Log("Check");
         }
             
     }
@@ -155,6 +157,7 @@ public class EnemyAI : MonoBehaviour
     {
         agent.SetDestination(player.position);
         agent.speed = chaseSpeed;
+        enemyAnim.SetBool("Chasing", true);
     }
 
     void AttackPlayer()
@@ -175,6 +178,7 @@ public class EnemyAI : MonoBehaviour
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
 
+            enemyAnim.SetBool("Chasing", false);
             enemyAnim.SetTrigger("Attack");
         }
     }
@@ -190,5 +194,10 @@ public class EnemyAI : MonoBehaviour
         {
             health -= playerS.damage;
         }
+    }
+
+    public void BombDmg()
+    {
+        health -= bomb.damage;
     }
 }
