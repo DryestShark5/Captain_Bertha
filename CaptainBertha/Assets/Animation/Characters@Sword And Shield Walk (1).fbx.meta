@@ -6,6 +6,9 @@ ModelImporter:
   - first:
       74: -203655887218126122
     second: Sword And Shield Walk (1)
+  - first:
+      74: -4162706645946004949
+    second: Sword And Shield Walk
   externalObjects: {}
   materials:
     materialImportMode: 2
