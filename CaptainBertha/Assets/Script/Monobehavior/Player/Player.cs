@@ -38,6 +38,9 @@ public class Player : MonoBehaviour
 
         healthBar.maxValue = health;
         healthBar.value = health;
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     private void Update()
     {
